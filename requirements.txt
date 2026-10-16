@@ -1,11 +1,11 @@
-torch
-numpy==1.26
+cupy-cuda11x==13.3.0
 gsplat==0.1.11
 nerfstudio==1.1.0
 scipy
 matplotlib
 imageio
 tensorboard
+cuda-python
 pyyaml
 future
 scikit-learn
@@ -28,5 +28,3 @@ einops == 0.7.0
 deepdish @ git+https://github.com/uchicago-cs/deepdish@b4f399a 
 e3nn
 -e deps/fast-gca
--e deps/polyscope-py
--e .
