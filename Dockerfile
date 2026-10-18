@@ -54,7 +54,7 @@ RUN conda run -n excellgen pip install "numpy<2"
 
 RUN conda install -n excellgen -c conda-forge colmap
 
-RUN apt-get update && apt install -y ffmpeg build-essential python3-dev libopenblas-dev
+RUN apt-get update && apt install -y ffmpeg cmake build-essential python3-dev libopenblas-dev
 
 # Replace MinkowskiEngine with our implmentation
 RUN rm -rf deps/MinkowskiEngine
@@ -71,7 +71,12 @@ RUN apt install -y xorg-dev libglu1-mesa-dev freeglut3-dev mesa-common-dev
 
 RUN conda run -n excellgen pip install --no-index torch-scatter -f https://pytorch-geometric.com/whl/torch-2.1.2+cu118.html
 
-RUN conda run -n excellgen pip install -r requirements.txt
+RUN --mount=type=cache,target=/root/.cache/pip \
+    conda run -n excellgen \
+    pip install \
+      --retries 100 \
+      --timeout 1000 \
+      -r requirements.txt
 
 RUN conda run -n excellgen pip install --no-deps -e deps/polyscope-py
 
