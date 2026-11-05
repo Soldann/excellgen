@@ -1,3 +1,4 @@
+numpy==1.26
 cupy-cuda11x==13.3.0
 gsplat==0.1.11
 nerfstudio==1.1.0
@@ -20,7 +21,7 @@ natsort
 trimesh
 nvtx
 pymcubes
-dataclass-wizard[yaml]
+dataclass-wizard[yaml]<1
 torch_efficient_distloss
 point-cloud-utils
 vector-quantize-pytorch

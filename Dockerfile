@@ -40,7 +40,9 @@ COPY . /workspace/excellgen
 
 WORKDIR /workspace/excellgen
 
+ENV DATA_ROOT=/workspace/excellgen/datasets
 ENV GCA_ROOT=/workspace/excellgen/deps/fast-gca
+ENV EXP_PRIMITIVES_ROOT=/workspace/excellgen/exp_primitives
 
 RUN git submodule update --init --recursive
 
@@ -62,7 +64,7 @@ RUN git clone https://github.com/clementjambon/MinkowskiEngine.git deps/Minkowsk
 
 WORKDIR /workspace/excellgen/deps/MinkowskiEngine
 
-RUN MAX_JOBS=4 conda run -n excellgen python setup.py install
+RUN MAX_JOBS=4 conda run -n excellgen python setup.py install --force_cuda
 
 WORKDIR /workspace/excellgen
 
@@ -78,7 +80,7 @@ RUN --mount=type=cache,target=/root/.cache/pip \
       --timeout 1000 \
       -r requirements.txt
 
-RUN conda run -n excellgen pip install --no-deps -e deps/polyscope-py
+RUN conda run -n excellgen pip install --no-build-isolation --no-deps -e deps/polyscope-py
 
 RUN conda run -n excellgen pip install -e .
 

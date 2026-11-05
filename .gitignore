@@ -200,3 +200,6 @@ imgui.ini
 !configs/default.yaml
 deps/MinkowskiEngine
 **.DS_Store
+
+docker_log.txt
+datasets
